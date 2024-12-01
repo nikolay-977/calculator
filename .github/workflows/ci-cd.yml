@@ -22,8 +22,8 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          distribution: 'temurin' # Используем OpenJDK
-          java-version: '17'      # Версию JDK можно задать по необходимости
+          distribution: 'temurin'
+          java-version: '17'
 
       - name: Cache Maven packages
         uses: actions/cache@v3
