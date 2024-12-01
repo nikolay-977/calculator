@@ -52,5 +52,5 @@ jobs:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
           JAVA_TOOL_OPTIONS: "-Xmx300m"
         run: |
-          git remote add heroku https://github.com/nikolay-977/calculator
+          git remote add heroku https://github.com/nikolay-977/calculator.git
           git push heroku main:main
