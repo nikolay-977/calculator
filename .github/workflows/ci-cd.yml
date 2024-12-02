@@ -13,7 +13,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
 
     steps:
       - name: Checkout Code
@@ -39,9 +39,14 @@ jobs:
       - name: Run Tests
         run: mvn test
 
+
       - name: Deploy to Heroku
+        if: github.ref == 'refs/heads/main' && success()
         env:
-          HEROKU_API_TOKEN: ${{ secrets.HEROKU_API_KEY }}
+          HEROKU_API_KEY: "HRKU-bc39cc65-2318-4833-bb47-9fc78aa8fc44"
           HEROKU_APP_NAME: "skillfactory-calculator"
-        if: github.ref == 'refs/heads/main' && job.status == 'success'
-        run: git push https://heroku:$HEROKU_API_TOKEN@git.heroku.com/agile-retreat-95765.git origin/main:main
+        run: |
+          curl https://cli-assets.heroku.com/install.sh | sh          
+          echo $HEROKU_API_KEY | heroku auth:token
+          git remote add heroku https://git.heroku.com/agile-retreat-95765.git
+          git push heroku HEAD:main
