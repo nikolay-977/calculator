@@ -39,14 +39,14 @@ jobs:
       - name: Run Tests
         run: mvn test
 
-  heroku-deploy:
+  deploy:
     runs-on: ubuntu-latest
+    needs: build
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v3
-      - name: Deploy to Heroku
-        uses: akhileshns/heroku-deploy@v3.12.12
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.13.15
         with:
-          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
-          heroku_email: ${{ secrets.HEROKU_EMAIL }}
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "skillfactory-calculator" #Must be unique in Heroku
+          heroku_email: "nikolay-2708@yandex.ru"
+          branch: "main"
