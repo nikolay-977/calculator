@@ -61,5 +61,5 @@ jobs:
 
       - name: Deploy to Heroku
         run: |
-          git remote add heroku https://git.heroku.com/skillfactory-calculator
+          git remote add heroku https://git.heroku.com/skillfactory-calculator.git
           git push heroku main:main
