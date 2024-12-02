@@ -50,14 +50,14 @@ jobs:
       - name: Set up Heroku Authentication
         run: |
           echo "machine api.heroku.com" > ~/.netrc
-          echo "  login ${{ skillfactory-calculator.HEROKU_EMAIL }}" >> ~/.netrc
-          echo "  password ${{ skillfactory-calculator.HEROKU_API_KEY }}" >> ~/.netrc
+          echo "  login ${{ secrets.HEROKU_EMAIL }}" >> ~/.netrc
+          echo "  password ${{ secrets.HEROKU_API_KEY }}" >> ~/.netrc
           echo "machine git.heroku.com" >> ~/.netrc
-          echo "  login ${{ skillfactory-calculator.HEROKU_EMAIL }}" >> ~/.netrc
-          echo "  password ${{ skillfactory-calculator.HEROKU_API_KEY }}" >> ~/.netrc
+          echo "  login ${{ secrets.HEROKU_EMAIL }}" >> ~/.netrc
+          echo "  password ${{ secrets.HEROKU_API_KEY }}" >> ~/.netrc
         env:
-          HEROKU_API_KEY: ${{ skillfactory-calculator.HEROKU_API_KEY }}
-          HEROKU_EMAIL: ${{ skillfactory-calculator.HEROKU_EMAIL }}
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
 
       - name: Deploy to Heroku
         run: |
