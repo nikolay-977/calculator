@@ -18,6 +18,7 @@ public class Calculator {
         if (b == 0) {
             throw new IllegalArgumentException("Деление на ноль невозможно");
         }
+
         return a / b;
     }
 }
