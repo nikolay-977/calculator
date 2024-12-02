@@ -44,10 +44,26 @@ jobs:
     needs: build
     if: github.ref == 'refs/heads/main'
     steps:
-      - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.13.15 # This is the action
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Heroku Authentication
+        run: |
+          echo "machine api.heroku.com" > ~/.netrc
+          echo "  login ${{ secrets.HEROKU_EMAIL }}" >> ~/.netrc
+          echo "  password ${{ secrets.HEROKU_API_KEY }}" >> ~/.netrc
+          echo "machine git.heroku.com" >> ~/.netrc
+          echo "  login ${{ secrets.HEROKU_EMAIL }}" >> ~/.netrc
+          echo "  password ${{ secrets.HEROKU_API_KEY }}" >> ~/.netrc
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
+
+      - name: Deploy to Heroku
+        uses: akhileshns/heroku-deploy@v3.13.15
         with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "skillfactory-calculator" #Must be unique in Heroku
-          heroku_email: "nikolay-2708@yandex.ru"
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: "skillfactory-calculator"
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
           healthcheck: "https://skillfactory-calculator.herokuapp.com/health"
+          branch: "main"
