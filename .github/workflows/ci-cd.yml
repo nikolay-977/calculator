@@ -43,7 +43,7 @@ jobs:
       - name: Deploy to Heroku
         if: github.ref == 'refs/heads/main' && success()
         env:
-          HEROKU_API_KEY: "HRKU-bc39cc65-2318-4833-bb47-9fc78aa8fc44"
+          HEROKU_API_KEY: "HRKU-3b9c4d61-628a-4ac7-9783-6313ccfeec44"
           HEROKU_APP_NAME: "skillfactory-calculator"
         run: |
           curl https://cli-assets.heroku.com/install.sh | sh          
