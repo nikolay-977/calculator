@@ -60,7 +60,7 @@ jobs:
 
       - name: Deploy to Heroku
         env:
-          HEROKU_API_KEY: "HRKU-3b9c4d61-628a-4ac7-9783-6313ccfeec44"
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
           HEROKU_APP_NAME: "skillfactory-calculator"
         run: |
           curl https://cli-assets.heroku.com/install.sh | sh
